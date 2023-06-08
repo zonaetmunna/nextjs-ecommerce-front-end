@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "title": "Introduction to Next.js",
+      "author": "John Doe",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      "date": "2022-10-15"
+    },
+    {
+      "id": 2,
+      "title": "Getting Started with React Hooks",
+      "author": "Jane Smith",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      "date": "2022-11-02"
+    },
+    {
+      "id": 3,
+      "title": "Mastering CSS Flexbox",
+      "author": "David Johnson",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+      "date": "2022-12-10"
+    }
+  ]
