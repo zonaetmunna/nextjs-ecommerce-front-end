@@ -1,15 +1,28 @@
-"use client"
+"use client";
 import AddProduct from "@/components/dashboard/product/AddProduct";
 import DeleteProduct from "@/components/dashboard/product/DeleteProduct";
 import UpdateProduct from "@/components/dashboard/product/UpdateProduct";
 import ViewProduct from "@/components/dashboard/product/ViewProduct";
 import { useGetCategoriesQuery } from "@/features/category/categoryApi";
-import { useAddProductMutation, useDeleteProductMutation, useGetProductsQuery, useUpdateProductMutation } from "@/features/product/productApi";
+import {
+  useAddProductMutation,
+  useDeleteProductMutation,
+  useGetProductsQuery,
+  useUpdateProductMutation,
+} from "@/features/product/productApi";
 import { ICategory, IProduct } from "@/types/types";
 import { useMemo, useState } from "react";
 import { BiBullseye } from "react-icons/bi";
-import { FaAngleDoubleLeft, FaAngleDoubleRight, FaChevronLeft, FaChevronRight, FaEdit, FaTimesCircle, FaTrash } from "react-icons/fa";
-import Select from 'react-select';
+import {
+  FaAngleDoubleLeft,
+  FaAngleDoubleRight,
+  FaChevronLeft,
+  FaChevronRight,
+  FaEdit,
+  FaTimesCircle,
+  FaTrash,
+} from "react-icons/fa";
+import Select from "react-select";
 
 export interface CategoryOption {
   label: string;
@@ -17,9 +30,8 @@ export interface CategoryOption {
 }
 
 function Products() {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryOption | null>(
-    null
-  );
+  const [selectedCategory, setSelectedCategory] =
+    useState<CategoryOption | null>(null);
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
@@ -34,8 +46,8 @@ function Products() {
 
   const products = data?.data.products;
 
-   // Filter products by selected category
-   const filteredProducts = useMemo(() => {
+  // Filter products by selected category
+  const filteredProducts = useMemo(() => {
     if (products && selectedCategory) {
       return products.filter(
         (product: IProduct) => product.category === selectedCategory.value
@@ -49,7 +61,7 @@ function Products() {
   const categories = categoryData?.data.categories;
   console.log(categories);
 
-  const categoryOptions = categories?.map((category:ICategory) => ({
+  const categoryOptions = categories?.map((category: ICategory) => ({
     label: category.name,
     value: category.name,
   }));
@@ -72,7 +84,7 @@ function Products() {
   /* handle update and delete */
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
-  const [addProduct]=useAddProductMutation();
+  const [addProduct] = useAddProductMutation();
 
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const [isSingleProductModalOpen, setIsSingleProductModalOpen] =
@@ -81,7 +93,8 @@ function Products() {
     useState<boolean>(false);
   const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] =
     useState<boolean>(false);
-  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState<boolean>(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] =
+    useState<boolean>(false);
 
   const handleUpdateProduct = (product: IProduct) => {
     updateProduct(product);
@@ -92,8 +105,7 @@ function Products() {
   };
   const handleAddProduct = (product: IProduct) => {
     addProduct(product);
-    
-  }
+  };
 
   const handleProductClick = (product: IProduct) => {
     setSelectedProduct(product);
@@ -110,9 +122,9 @@ function Products() {
     setIsDeleteProductModalOpen(true);
   };
 
-  const handleAddClick = () => {
+  const handleAddProductClick = () => {
     setIsAddProductModalOpen(true);
-  }
+  };
 
   return (
     <div className="container mx-auto">
@@ -154,6 +166,14 @@ function Products() {
           )}
         </div>
         {/* add product */}
+        <div className="w-full md:w-3/4 lg:w-1/2 xl:w-1/3 flex items-center ">
+          <button
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => setIsAddProductModalOpen(true)}
+          >
+            Add Product
+          </button>
+        </div>
       </div>
 
       <table className="min-w-full divide-y divide-gray-200 mt-10 p-5">
@@ -209,9 +229,7 @@ function Products() {
                   ${product.price.toFixed(2)}
                 </div>
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-500">${product.store}</div>
-              </td>
+              <td className="px-6 py-4 whitespace-nowrap"></td>
               <td className="border px-4 py-2">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
@@ -300,8 +318,9 @@ function Products() {
 
       {isAddProductModalOpen && (
         <AddProduct
-
-          onClose={() => setIsAddProductModalOpen(false)} />
+          onClose={() => setIsAddProductModalOpen(false)}
+          onAddProduct={handleAddProduct}
+        />
       )}
 
       {isSingleProductModalOpen && (
@@ -326,7 +345,7 @@ function Products() {
         />
       )}
     </div>
-  )
+  );
 }
 
-export default Products
+export default Products;

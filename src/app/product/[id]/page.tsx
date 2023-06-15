@@ -43,15 +43,17 @@ function ProductDetails({ params: { id } }: Params) {
         <p>Error occurred</p>
       ) : (
         <div className="flex">
-          <div className="w-1/2">
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={800}
-              height={800}
-              className="w-full h-auto"
-            />
-          </div>
+          {product && (
+            <div className="w-1/2">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={800}
+                height={800}
+                className="w-full h-auto"
+              />
+            </div>
+          )}
           <div className="w-1/2 ml-8">
             <h2 className="text-2xl font-bold mb-4">{product?.name}</h2>
             <p className="text-gray-700 mb-4">${product?.price}</p>
