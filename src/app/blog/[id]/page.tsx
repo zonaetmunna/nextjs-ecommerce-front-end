@@ -1,13 +1,9 @@
 "use client";
-type Params = {
-  params: {
-    id: string;
-  };
-};
-const BlogDetail = ({ params: { id } }: Params) => {
+
+const BlogDetail = () => {
   return (
     <div>
-      <p>{id}</p>
+      <h1>Blog Detail</h1>
     </div>
   );
 };
