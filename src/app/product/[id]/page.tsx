@@ -61,13 +61,15 @@ function ProductDetails({ params: { id } }: Params) {
             <p className="text-gray-700 mb-4">Stock: {product?.stock}</p>
             <p className="text-gray-700 mb-4">{product?.description}</p>
             <div className="flex space-x-4">
-              <button
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-                onClick={() => handleAddToCart(product)}
-              >
-                <FiShoppingCart className="inline-block mr-2" />
-                Add to Cart
-              </button>
+              {product && (
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                  onClick={() => handleAddToCart(product)}
+                >
+                  <FiShoppingCart className="inline-block mr-2" />
+                  Add to Cart
+                </button>
+              )}
               <button
                 className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
                 onClick={handleAddToWishlist}

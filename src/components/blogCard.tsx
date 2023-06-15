@@ -1,6 +1,5 @@
 import { IBlog } from "@/types/types";
 import Link from "next/link";
-import React from "react";
 
 const BlogCard = ({ blog }: { blog: IBlog }) => {
   return (

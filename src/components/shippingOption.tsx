@@ -6,7 +6,6 @@ import {
   setTotal,
 } from "@/features/cart/cartSlice";
 import { AppDispatch } from "@/features/store";
-import React from "react";
 import { useDispatch } from "react-redux";
 
 export default function ShippingOption({
