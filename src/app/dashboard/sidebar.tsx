@@ -9,13 +9,19 @@ export default function SideBar() {
       <div className="flex-grow overflow-y-auto">
         <nav className="flex flex-col mt-8">
           <Link href="/dashboard">
-            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">Dashboard</p>
+            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">
+              Dashboard
+            </p>
           </Link>
           <Link href="/dashboard/categories">
-            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">Categories</p>
+            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">
+              Categories
+            </p>
           </Link>
           <Link href="/dashboard/products">
-            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">Products</p>
+            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">
+              Products
+            </p>
           </Link>
           <Link href="/dashboard/customers">
             <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">
@@ -38,9 +44,7 @@ export default function SideBar() {
             </p>
           </Link>
           <Link href="/dashboard/orders">
-            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">
-              Orders
-            </p>
+            <p className="mx-4 my-2 p-2 rounded-md hover:bg-gray-200">Orders</p>
           </Link>
         </nav>
       </div>

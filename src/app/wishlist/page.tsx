@@ -7,18 +7,18 @@ import { toast } from "react-hot-toast";
 import { MdRemoveCircleOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 function Wishlist() {
-    const { wishlist } = useSelector((state: RootState) => state.wishlist);
+  const { wishlist } = useSelector((state: RootState) => state.wishlist);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleRemove = (productId: string) => {
     try {
-        dispatch(removeFromWishlist(productId));
-        toast.success("Product deleted to wishlist");
-      } catch (error) {
-        toast.error("Failed to delete product to wishlist");
-      }
+      dispatch(removeFromWishlist(productId));
+      toast.success("Product deleted to wishlist");
+    } catch (error) {
+      toast.error("Failed to delete product to wishlist");
+    }
   };
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-2xl font-bold mb-4">WishList</h1>
@@ -71,7 +71,7 @@ function Wishlist() {
         <p className="text-lg">Your cart is empty</p>
       )}
     </div>
-  )
+  );
 }
 
-export default Wishlist
+export default Wishlist;

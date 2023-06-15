@@ -1,8 +1,5 @@
-
 function Orders() {
-  return (
-    <div>page</div>
-  )
+  return <div>page</div>;
 }
 
-export default Orders
+export default Orders;

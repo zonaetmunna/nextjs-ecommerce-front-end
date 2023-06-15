@@ -1,4 +1,3 @@
-
 import SideBar from "./sidebar";
 
 export default function DashboardLayout({
@@ -7,15 +6,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-      <section className="flex">
-        <div className="flex flex-grow">
-          <SideBar />
-          <div>
-            <nav/>
-            <div className="container mx-auto p-6">{children}</div>
-            
-          </div>
+    <section className="flex">
+      <div className="flex flex-grow">
+        <SideBar />
+        <div>
+          <nav />
+          <div className="container mx-auto p-6">{children}</div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 }

@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
 import { useGetProductsQuery } from "@/features/product/productApi";
 import Banner from "./banner";
 import ProductCard from "./productCard";
 
 export default function Home() {
-  const {data,error,isError}=useGetProductsQuery({});
-  const products=data?.data.products;
+  const { data, error, isError } = useGetProductsQuery({});
+  const products = data?.data.products;
 
   return (
     <main className="">

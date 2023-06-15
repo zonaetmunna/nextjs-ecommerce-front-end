@@ -1,38 +1,39 @@
-"use client"
+"use client";
 import { addToCart } from "@/features/cart/cartSlice";
 import { useGetSingleProductQuery } from "@/features/product/productApi";
 import { AppDispatch } from "@/features/store";
 import { addToWishlist } from "@/features/wishlist/wishlistSlice";
+import { IProduct } from "@/types/types";
 import Image from "next/image";
-import toast from 'react-hot-toast';
-import { FiHeart, FiShoppingCart } from 'react-icons/fi';
+import toast from "react-hot-toast";
+import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 
 type Params = {
-    params: {
-      id: string;
-    };
+  params: {
+    id: string;
   };
+};
 function ProductDetails({ params: { id } }: Params) {
-  const {data,error,isError,isLoading}=useGetSingleProductQuery(id);
-  const product=data?.data
-  const dispatch=useDispatch<AppDispatch>();
-  const handleAddToCart = async (product: any) => {
+  const { data, error, isError, isLoading } = useGetSingleProductQuery(id);
+  const product = data?.data;
+  const dispatch = useDispatch<AppDispatch>();
+  const handleAddToCart = async (product: IProduct) => {
     try {
-        dispatch(addToCart(product));
-        toast.success("Product added to cart");
-      } catch (error) {
-        toast.error("Failed to add product to cart");
-      }
+      dispatch(addToCart(product));
+      toast.success("Product added to cart");
+    } catch (error) {
+      toast.error("Failed to add product to cart");
+    }
   };
 
   const handleAddToWishlist = () => {
     try {
-        dispatch(addToWishlist(product));
-        toast.success("Product added to wishlist");
-      } catch (error) {
-        toast.error("Failed to add product to wishlist");
-      }
+      dispatch(addToWishlist(product));
+      toast.success("Product added to wishlist");
+    } catch (error) {
+      toast.error("Failed to add product to wishlist");
+    }
   };
   return (
     <div className="container mx-auto p-8">
@@ -43,7 +44,13 @@ function ProductDetails({ params: { id } }: Params) {
       ) : (
         <div className="flex">
           <div className="w-1/2">
-            <Image src={product?.image} alt={product?.name} width={800} height={800} className="w-full h-auto" />
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={800}
+              height={800}
+              className="w-full h-auto"
+            />
           </div>
           <div className="w-1/2 ml-8">
             <h2 className="text-2xl font-bold mb-4">{product?.name}</h2>
@@ -71,7 +78,7 @@ function ProductDetails({ params: { id } }: Params) {
         </div>
       )}
     </div>
-  )
+  );
 }
 
 export default ProductDetails;

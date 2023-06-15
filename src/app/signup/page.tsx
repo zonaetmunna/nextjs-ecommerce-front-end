@@ -14,12 +14,12 @@ export default function Signup() {
   } = useForm<ISignUpData>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit = (data:ISignUpData) => {
-    const signUpData={
-      firstName:data.firstName,
-      email:data.email,
-      password:data.password
-    }
+  const onSubmit = (data: ISignUpData) => {
+    const signUpData = {
+      firstName: data.firstName,
+      email: data.email,
+      password: data.password,
+    };
     // Handle signup logic here
     dispatch(signupUser(signUpData));
   };

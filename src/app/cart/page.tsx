@@ -1,4 +1,5 @@
 "use client";
+import ShippingOption from "@/components/shippingOption";
 import {
   applyDiscountCode,
   removeFromCart,
@@ -7,13 +8,12 @@ import {
   updateQuantity,
 } from "@/features/cart/cartSlice";
 import { AppDispatch, RootState } from "@/features/store";
-import { Product } from "@/types/types";
+import { IProduct } from "@/types/types";
 import Image from "next/image";
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { MdRemoveCircleOutline } from "react-icons/md";
-import ShippingOption from "@/components/shippingOption";
 import Link from "next/link";
+import { useEffect } from "react";
+import { MdRemoveCircleOutline } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart() {
   const { cart, subtotal, discountCode, total, shippingOption, shippingCost } =
@@ -60,7 +60,7 @@ export default function Cart() {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item: Product) => (
+              {cart.map((item: IProduct) => (
                 <tr key={item._id} className="border-b border-gray-400">
                   <td className="py-4">
                     <div className="flex items-center">

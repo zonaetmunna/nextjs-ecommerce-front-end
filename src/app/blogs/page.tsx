@@ -1,6 +1,5 @@
 import BlogCard from "@/components/blogCard";
 import { IBlog } from "@/types/types";
-import React from "react";
 
 async function fetchBlogs() {
   const response = await fetch("http://localhost:3000/api/blogs");

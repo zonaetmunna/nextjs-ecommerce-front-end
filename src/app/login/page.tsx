@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-
 export default function Login() {
   const {
     handleSubmit,
@@ -15,12 +14,12 @@ export default function Login() {
   } = useForm<ILoginData>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit= (data:ILoginData) => {
+  const onSubmit = (data: ILoginData) => {
     // Handle login logic here
     console.log(data);
-    const loginData={
-      email:data.email,
-      password:data.password
+    const loginData = {
+      email: data.email,
+      password: data.password,
     };
     dispatch(loginUser(loginData));
   };

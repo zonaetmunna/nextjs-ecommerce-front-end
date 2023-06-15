@@ -1,8 +1,5 @@
-
 function Customers() {
-  return (
-    <div>customer</div>
-  )
+  return <div>customer</div>;
 }
 
-export default Customers
+export default Customers;

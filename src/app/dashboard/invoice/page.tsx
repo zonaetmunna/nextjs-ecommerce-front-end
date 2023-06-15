@@ -1,8 +1,5 @@
-
 function Invoice() {
-  return (
-    <div>page</div>
-  )
+  return <div>page</div>;
 }
 
-export default Invoice
+export default Invoice;

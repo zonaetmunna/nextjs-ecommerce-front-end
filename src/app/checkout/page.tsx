@@ -1,12 +1,11 @@
 "use client";
-import { useForm, useWatch } from "react-hook-form";
-
-import { IBillingAddress } from "@/types/types";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/features/store";
 import { addToBillingAddress } from "@/features/cart/cartSlice";
+import { AppDispatch, RootState } from "@/features/store";
+import { IBillingAddress } from "@/types/types";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Checkout() {
   const {

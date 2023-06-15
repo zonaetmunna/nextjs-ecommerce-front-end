@@ -1,11 +1,11 @@
-"use client"
-import { logOut } from '@/features/auth/authSlice';
-import { RootState } from '@/features/store';
-import Link from 'next/link';
-import { useState } from 'react';
-import { FaBars, FaHeart, FaSearch, FaShoppingCart } from 'react-icons/fa';
+"use client";
+import { logOut } from "@/features/auth/authSlice";
+import { RootState } from "@/features/store";
+import Link from "next/link";
+import { useState } from "react";
+import { FaBars, FaHeart, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
@@ -27,10 +27,15 @@ export default function Navbar() {
     dispatch(logOut());
   };
   return (
-    <nav onClick={()=>setShowLinks(false)} className="flex items-center justify-between p-4 bg-gray-100 text-dark">
+    <nav
+      onClick={() => setShowLinks(false)}
+      className="flex items-center justify-between p-4 bg-gray-100 text-dark"
+    >
       <div className="flex items-center">
         {/* <img src="/logo.png" alt="Logo" className="w-10 h-10" /> */}
-        <Link href="/" className="ml-2 text-lg font-semibold">My App</Link>
+        <Link href="/" className="ml-2 text-lg font-semibold">
+          My App
+        </Link>
       </div>
       <div className="hidden md:flex items-center space-x-4">
         <div className="relative">
@@ -44,14 +49,10 @@ export default function Navbar() {
       </div>
       <div className="flex items-center space-x-4">
         <Link href="/cart">
-
-            <FaShoppingCart className="w-5 h-5" />
-        
+          <FaShoppingCart className="w-5 h-5" />
         </Link>
         <Link href="/wishlist">
-          
-            <FaHeart className="w-5 h-5" />
-          
+          <FaHeart className="w-5 h-5" />
         </Link>
         {!user?.email && (
           <Link href="/login" className="mx-2">
@@ -61,7 +62,7 @@ export default function Navbar() {
 
         {user?.role === "admin" && (
           <Link href="/dashboard" className="mx-2">
-          Admin Dashboard
+            Admin Dashboard
           </Link>
         )}
 
@@ -100,18 +101,21 @@ export default function Navbar() {
       </div>
 
       <div className="md:hidden flex items-center">
-        <button
-          className="p-2 rounded-md bg-gray-200"
-          onClick={toggleMenu}
-        >
+        <button className="p-2 rounded-md bg-gray-200" onClick={toggleMenu}>
           <FaBars className="w-5 h-5" />
         </button>
       </div>
       {isOpen && (
         <div className="md:hidden mt-2 flex flex-col space-y-2">
-          <a href="#" className="text-white">Link 1</a>
-          <a href="#" className="text-white">Link 2</a>
-          <a href="#" className="text-white">Link 3</a>
+          <a href="#" className="text-white">
+            Link 1
+          </a>
+          <a href="#" className="text-white">
+            Link 2
+          </a>
+          <a href="#" className="text-white">
+            Link 3
+          </a>
         </div>
       )}
     </nav>
