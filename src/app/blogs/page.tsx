@@ -1,3 +1,4 @@
+"use client";
 import BlogCard from "@/components/blogCard";
 import { IBlog } from "@/types/types";
 

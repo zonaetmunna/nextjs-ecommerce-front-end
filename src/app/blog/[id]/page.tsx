@@ -1,3 +1,4 @@
+"use client";
 type Params = {
   params: {
     id: string;
