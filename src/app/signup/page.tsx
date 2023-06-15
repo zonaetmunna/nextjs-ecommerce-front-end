@@ -1,22 +1,27 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { signupUser } from "@/features/auth/authSlice";
+import { AppDispatch } from "@/features/store";
+import { ISignUpData } from "@/types/types";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
-interface SignupForm {
-  name: string;
-  email: string;
-  password: string;
-}
 export default function Signup() {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<SignupForm>();
+  } = useForm<ISignUpData>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit: SubmitHandler<SignupForm> = (data) => {
+  const onSubmit = (data:ISignUpData) => {
+    const signUpData={
+      firstName:data.firstName,
+      email:data.email,
+      password:data.password
+    }
     // Handle signup logic here
-    console.log(data);
+    dispatch(signupUser(signUpData));
   };
   return (
     <div className="flex justify-center items-center h-screen">
@@ -24,16 +29,16 @@ export default function Signup() {
         <h1 className="text-3xl font-bold mb-6">Signup</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block mb-1">
-              Name:
+            <label htmlFor="firstName" className="block mb-1">
+              First Name:
             </label>
             <input
               type="text"
-              id="name"
-              {...register("name", { required: true })}
+              id="firstName"
+              {...register("firstName", { required: true })}
               className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             />
-            {errors.name && (
+            {errors.firstName && (
               <span className="text-red-500">Name is required</span>
             )}
           </div>

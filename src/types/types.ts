@@ -1,5 +1,5 @@
 // ------------------account-------------//
-export interface authInitState {
+export interface IAuthInitState {
     user: IAuthData | null;
     isLoading: true | false,
     isError: true | false,
@@ -10,26 +10,28 @@ export interface authInitState {
   // auth login interface
   export interface IAuthData {
     _id: string;
-    name: string;
+    firstName: string;
+    lastName?: string;
     email: string;
-    phone: string;
+    phone?: string;
     role: string;
-    status: string;
-    profileImage: string;
+    status?: string;
+    imageURL?: string;
     token: string;
   }
   
   // types signup data
-  export interface SignUpData {
-    name: string;
+  export interface ISignUpData {
+    firstName: string;
+    lastName?:string;
     email: string;
     password: string;
-    phone: string;
+    phone?: string;
     role?: string;
     status?: string;
     profileImage?: string;
   }
-  export interface LoginData {
+  export interface ILoginData {
     email: string;
     password: string;
   }

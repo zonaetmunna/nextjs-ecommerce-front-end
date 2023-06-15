@@ -1,43 +1,72 @@
 "use client";
 import { addToCart } from "@/features/cart/cartSlice";
 import { AppDispatch } from "@/features/store";
-import { Product } from "@/types/types";
+import { addToWishlist } from "@/features/wishlist/wishlistSlice";
+import { IProduct } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
-import { BiShoppingBag } from "react-icons/bi";
+import toast from 'react-hot-toast';
+import { FiEye, FiHeart, FiShoppingCart } from 'react-icons/fi';
 import { useDispatch } from "react-redux";
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: IProduct }) {
+  const {name,image,price,stock,category,_id}=product;
   const dispatch = useDispatch<AppDispatch>();
-  const handleAddProductCart = (product: Product) => {
-    dispatch(addToCart(product));
+ 
+  const handleAddToCart =async (product: IProduct) => {
+    try {
+      dispatch(addToCart(product));
+      toast.success("Product added to cart");
+    } catch (error) {
+      toast.error("Failed to add product to cart");
+    }
   };
 
+  const handleAddToWishlist =async () => {
+    try {
+      dispatch(addToWishlist(product));
+      toast.success("Product added to wishlist");
+    } catch (error) {
+      toast.error("Failed to add product to wishlist");
+    }
+  };
+
+  
+
   return (
-    <div className="bg-white shadow-md rounded-md overflow-hidden">
-      <Image
-        src={product.image}
-        alt={product.name}
-        className="h-64 w-full object-cover"
-        width={500}
-        height={300}
-      />
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
-        <p className="text-gray-700 font-bold">${product.price}</p>
-        <Link href={`/products/${product._id}`}>
-          <p className="text-blue-500 hover:text-blue-700 cursor-pointer">
-            More details
-          </p>
-        </Link>
+    <div className="product-card bg-white shadow-lg rounded-lg p-6">
+    <div className="product-image">
+      <Image src={image} alt={name} width={300} height={300} className="w-full h-32 object-cover mb-4" />
+    </div>
+    <div className="product-details">
+      <h2 className="text-xl font-bold">{name}</h2>
+      <p className="text-gray-700">${price}</p>
+      <p className="text-gray-700">Stock: {stock}</p>
+      <p className="text-gray-700">Category: {category}</p>
+      <p className="text-gray-700">ID: {_id}</p>
+      <div className="buttons mt-4 space-x-2">
         <button
-          type="button"
-          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          onClick={() => handleAddProductCart(product)}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          onClick={()=>handleAddToCart(product)}
         >
-          <BiShoppingBag className="ml-1 mr-2 h-5 w-5" />
+          <FiShoppingCart className="inline-block mr-2" />
+         
         </button>
+        <button
+          className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+          onClick={handleAddToWishlist}
+        >
+          <FiHeart className="inline-block mr-2" />
+         
+        </button>
+        <Link href={`/product/${_id}`}
+          className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded"
+          
+        >
+          <FiEye className="inline-block mr-2" />
+        
+        </Link>
       </div>
     </div>
+  </div>
   );
 }

@@ -1,9 +1,10 @@
 "use client"
+import AddProduct from "@/components/dashboard/product/AddProduct";
 import DeleteProduct from "@/components/dashboard/product/DeleteProduct";
 import UpdateProduct from "@/components/dashboard/product/UpdateProduct";
 import ViewProduct from "@/components/dashboard/product/ViewProduct";
 import { useGetCategoriesQuery } from "@/features/category/categoryApi";
-import { useDeleteProductMutation, useGetProductsQuery, useUpdateProductMutation } from "@/features/product/productApi";
+import { useAddProductMutation, useDeleteProductMutation, useGetProductsQuery, useUpdateProductMutation } from "@/features/product/productApi";
 import { ICategory, IProduct } from "@/types/types";
 import { useMemo, useState } from "react";
 import { BiBullseye } from "react-icons/bi";
@@ -71,6 +72,7 @@ function Products() {
   /* handle update and delete */
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
+  const [addProduct]=useAddProductMutation();
 
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
   const [isSingleProductModalOpen, setIsSingleProductModalOpen] =
@@ -79,6 +81,7 @@ function Products() {
     useState<boolean>(false);
   const [isDeleteProductModalOpen, setIsDeleteProductModalOpen] =
     useState<boolean>(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState<boolean>(false);
 
   const handleUpdateProduct = (product: IProduct) => {
     updateProduct(product);
@@ -87,6 +90,10 @@ function Products() {
   const handleDeleteProduct = (id: string) => {
     deleteProduct(id);
   };
+  const handleAddProduct = (product: IProduct) => {
+    addProduct(product);
+    
+  }
 
   const handleProductClick = (product: IProduct) => {
     setSelectedProduct(product);
@@ -102,10 +109,16 @@ function Products() {
     setSelectedProduct(product);
     setIsDeleteProductModalOpen(true);
   };
+
+  const handleAddClick = () => {
+    setIsAddProductModalOpen(true);
+  }
+
   return (
     <div className="container mx-auto">
       <h1 className="text-3xl font-bold mb-4">Product List</h1>
       <div className="flex items-center space-x-2 mb-4">
+        {/* select category  */}
         <div className="relative">
           <Select
             options={categoryOptions}
@@ -122,6 +135,7 @@ function Products() {
             </button>
           )}
         </div>
+        {/* input search */}
         <div className="relative">
           <input
             type="text"
@@ -139,7 +153,9 @@ function Products() {
             </button>
           )}
         </div>
+        {/* add product */}
       </div>
+
       <table className="min-w-full divide-y divide-gray-200 mt-10 p-5">
         <thead className="bg-gray-50">
           <tr>
@@ -281,6 +297,12 @@ function Products() {
         </ul>
       </nav>
       {/* modal */}
+
+      {isAddProductModalOpen && (
+        <AddProduct
+
+          onClose={() => setIsAddProductModalOpen(false)} />
+      )}
 
       {isSingleProductModalOpen && (
         <ViewProduct

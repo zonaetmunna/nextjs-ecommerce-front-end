@@ -1,22 +1,28 @@
 "use client";
+import { loginUser } from "@/features/auth/authSlice";
+import { AppDispatch } from "@/features/store";
+import { ILoginData } from "@/types/types";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
-interface LoginForm {
-  email: string;
-  password: string;
-}
 
 export default function Login() {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<LoginForm>();
+  } = useForm<ILoginData>();
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onSubmit: SubmitHandler<LoginForm> = (data) => {
+  const onSubmit= (data:ILoginData) => {
     // Handle login logic here
     console.log(data);
+    const loginData={
+      email:data.email,
+      password:data.password
+    };
+    dispatch(loginUser(loginData));
   };
 
   return (

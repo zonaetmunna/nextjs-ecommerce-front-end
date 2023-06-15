@@ -1,4 +1,4 @@
-import { Product, ICartState, IBillingAddress } from "@/types/types";
+import { IBillingAddress, ICartState, IProduct } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: ICartState = {
@@ -15,7 +15,7 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addToCart: (state, action: PayloadAction<Product>) => {
+        addToCart: (state, action: PayloadAction<IProduct>) => {
             const selectedProduct = state.cart.find(
                 (product) => product._id === action.payload._id
             );

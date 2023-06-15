@@ -1,6 +1,7 @@
 import Footer from "@/components/common/Footer";
 import Providers from "@/components/providers";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import Navbar from "./navbar";
 
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
+        <Toaster />
           <Navbar />
           {children}
           <Footer/>
