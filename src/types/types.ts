@@ -54,7 +54,11 @@ export interface IProduct {
   category: string;
   price: number;
   stock: number;
-  quantity?: number;
+  rating: number;
+  brand: string;
+  color: string[];
+  size: string[];
+  quantity: number;
 }
 
 export interface IResponseProduct {
@@ -80,6 +84,11 @@ export interface IQueryParams {
   search?: string;
   page?: number;
   limit?: number;
+  price?: number; // Example: '0-50'
+  rating?: number;
+  brand?: string;
+  color?: string;
+  size?: string;
 }
 
 // cart

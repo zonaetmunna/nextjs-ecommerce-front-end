@@ -38,6 +38,12 @@ const productApi = apiSlice.injectEndpoints({
       },
       providesTags: ["product"],
     }),
+    getCategoryProducts: builder.query<IResponseProduct, string>({
+      query: (category) => ({
+        url: `/category-product/${category}`,
+      }),
+      providesTags: ["product"],
+    }),
     getSingleProduct: builder.query<IResponseProductSingle, string>({
       query: (id) => ({
         url: `/products/${id}`,
@@ -73,6 +79,7 @@ const productApi = apiSlice.injectEndpoints({
 
 export const {
   useGetProductsQuery,
+  useGetCategoryProductsQuery,
   useGetSingleProductQuery,
   useAddProductMutation,
   useDeleteProductMutation,

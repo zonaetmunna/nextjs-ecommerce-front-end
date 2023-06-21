@@ -10,7 +10,16 @@ export default function Home() {
 
   return (
     <main className="">
+      {/* slider banner */}
       <Banner />
+      {/* category */}
+      {/* top rated product */}
+      {/* latest product */}
+      {/* main product */}
+      {/* women product */}
+      {/* baby product */}
+      {/* others */}
+      {/* offer product */}
       <div className="grid grid-cols-3 gap-4">
         {/* {isError && <div>Error occurred: {error.message}</div>} */}
         {!isError && !data && <div>Loading...</div>}
