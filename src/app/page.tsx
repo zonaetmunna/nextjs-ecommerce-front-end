@@ -1,5 +1,7 @@
 "use client";
 
+import ServiceBanner from "@/components/serviceBanner";
+import SubscribeBanner from "@/components/subscribeBanner";
 import { useGetProductsQuery } from "@/features/product/productApi";
 import Banner from "./banner";
 import ProductCard from "./productCard";
@@ -9,7 +11,7 @@ export default function Home() {
   const products = data?.data.products;
 
   return (
-    <main className="">
+    <main className="bg-gray-100">
       {/* slider banner */}
       <Banner />
       {/* category */}
@@ -32,6 +34,8 @@ export default function Home() {
           </>
         )}
       </div>
+      <ServiceBanner />
+      <SubscribeBanner />
     </main>
   );
 }

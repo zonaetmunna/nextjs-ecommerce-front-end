@@ -1,4 +1,5 @@
 "use client";
+
 import { logOut } from "@/features/auth/authSlice";
 import { RootState } from "@/features/store";
 import Link from "next/link";
