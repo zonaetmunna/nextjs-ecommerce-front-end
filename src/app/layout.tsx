@@ -1,8 +1,12 @@
+"use client";
+import CartModal from "@/components/cartModal";
 import Footer from "@/components/common/Footer";
 import MiniNavbar from "@/components/common/miniNavbar";
 import Navbar from "@/components/common/navbar";
+import SeconedNavbar from "@/components/common/seconedNavbar";
 import Providers from "@/components/providers";
 import { Inter } from "next/font/google";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
@@ -18,15 +22,27 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleCartClick = () => {
+    setIsCartOpen(true);
+  };
+
+  const handleCartModalClose = () => {
+    setIsCartOpen(false);
+  };
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <Providers>
           <Toaster />
           <MiniNavbar />
-          <Navbar />
+          <Navbar onCartClick={handleCartClick} />
+          <SeconedNavbar />
           {children}
           <Footer />
+          {isCartOpen && <CartModal onClose={handleCartModalClose} />}
         </Providers>
       </body>
     </html>

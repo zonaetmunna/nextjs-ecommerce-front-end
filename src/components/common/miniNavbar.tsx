@@ -52,7 +52,7 @@ const customSelectStyles = {
 
 const MiniNavbar: React.FC = () => {
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-blue-700 py-2 px-4 flex items-center justify-between">
+    <nav className="bg-gradient-to-r from-blue-500 to-blue-700  px-4 flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <a href="tel:123456789" className="flex items-center text-gray-100">
           <FiPhone className="mr-1" />

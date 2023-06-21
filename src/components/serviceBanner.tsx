@@ -5,6 +5,7 @@ import {
   FaTimesCircle,
   FaTruck,
 } from "react-icons/fa";
+import { Fade } from "react-reveal";
 
 const deliveryOptions = [
   {
@@ -43,16 +44,17 @@ export default function ServiceBanner() {
   return (
     <div className="flex justify-center items-center my-10 p-10">
       {deliveryOptions.map((option) => (
-        <div
-          key={option.name}
-          className={`w-64 border rounded-lg p-4 mr-6 ${option.color} text-white flex items-center`}
-        >
-          <option.icon className="text-4xl mr-4" />
-          <div>
-            <div className="text-xl font-medium">{option.name}</div>
-            <div className="text-sm">{option.description}</div>
+        <Fade key={option.name} bottom cascade>
+          <div
+            className={`w-64 border rounded-lg p-4 mr-6 ${option.color} text-white flex items-center`}
+          >
+            <option.icon className="text-4xl mr-4" />
+            <div>
+              <div className="text-xl font-medium">{option.name}</div>
+              <div className="text-sm">{option.description}</div>
+            </div>
           </div>
-        </div>
+        </Fade>
       ))}
     </div>
   );
