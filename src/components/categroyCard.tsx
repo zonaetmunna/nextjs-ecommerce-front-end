@@ -15,8 +15,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
           <Image
             src={category.imageUrl}
             alt={category.name}
-            width={100}
-            height={100}
+            width={300}
+            height={300}
           />
         </div>
         <div className="mt-4 text-center">

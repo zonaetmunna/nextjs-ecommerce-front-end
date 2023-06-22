@@ -136,14 +136,39 @@ export interface IResponseCategories {
   token: string | null;
 }
 
-export interface IResponseCategorySingle {
+export interface IResponseBrandSingle {
   error: boolean;
   data: ICategory;
   message: string | null;
   token: string | null;
 }
 
-// blogs
+/* ---------> brands */
+export interface IBrand {
+  _id?: string;
+  name: string;
+  imageUrl: string;
+}
+
+export interface IResponseBrands {
+  error: boolean;
+  data: {
+    count: number;
+    totalPage: number | null;
+    brand: IBrand[];
+  };
+  message: string;
+  token: string | null;
+}
+
+export interface IResponseBrandSingle {
+  error: boolean;
+  data: IBrand;
+  message: string | null;
+  token: string | null;
+}
+
+/* -------- > blogs*/
 export interface IBlog {
   id: string;
   title: string;

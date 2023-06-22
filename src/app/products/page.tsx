@@ -30,6 +30,7 @@ const Products = () => {
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<"list" | "grid">("grid");
   // api data
   const { data, error, isError } = useGetProductsQuery({
     category: selectedCategory?.value,
@@ -86,9 +87,14 @@ const Products = () => {
     }
   }, [isError]);
 
+  const handleViewModeChange = (mode: "list" | "grid") => {
+    setViewMode(mode);
+  };
+
   return (
     <div className="flex flex-col md:flex-row">
       <div className="w-full md:w-1/4 lg:w-1/5 p-4">
+        {/* filter sidebar */}
         <FilterSidebar
           categories={categories}
           selectedCategory={selectedCategory}
@@ -108,17 +114,26 @@ const Products = () => {
         />
       </div>
       <div className="w-full md:w-3/4 lg:w-4/5 p-4">
-        <FilterBar filterProducts={filterProducts} />
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold">
-            {filterProducts?.length} results
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filterProducts?.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        </div>
+        {/* filter bar */}
+        <FilterBar
+          filterProducts={filterProducts}
+          viewMode={viewMode}
+          onViewModeChange={handleViewModeChange}
+        />
+        {/* products */}
+        {viewMode === "grid" ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filterProducts?.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col">
+            {filterProducts?.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        )}
         <div>{/* load products */}</div>
       </div>
     </div>

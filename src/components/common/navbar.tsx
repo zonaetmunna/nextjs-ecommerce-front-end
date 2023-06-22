@@ -1,11 +1,14 @@
 "use client";
 import { logOut } from "@/features/auth/authSlice";
+import { useGetCategoriesQuery } from "@/features/category/categoryApi";
 import { RootState } from "@/features/store";
+import { ICategory } from "@/types/types";
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars, FaHeart, FaSearch, FaShoppingCart } from "react-icons/fa";
 import { VscAccount } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
 
 export default function Navbar({ onCartClick }: { onCartClick: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +31,16 @@ export default function Navbar({ onCartClick }: { onCartClick: () => void }) {
   const handleLogOut = () => {
     dispatch(logOut());
   };
-  
- 
+
+  const { data: categoriesData } = useGetCategoriesQuery({});
+  const categories = categoriesData?.data.categories;
+  const categoryOptions = categories
+    ? categories.map((category: ICategory) => ({
+        value: category.name,
+        label: category.name,
+      }))
+    : [];
+
   return (
     <nav className="flex flex-col md:flex-row items-center justify-between p-4 bg-gray-100 text-black">
       <div className="flex items-center space-x-4">
@@ -44,7 +55,8 @@ export default function Navbar({ onCartClick }: { onCartClick: () => void }) {
         </div>
       </div>
 
-      <div className="flex items-center md:space-x-4">
+      {/* input  */}
+      <div className="flex items-center space-x-4">
         <div className="relative">
           <input
             type="text"
@@ -54,10 +66,20 @@ export default function Navbar({ onCartClick }: { onCartClick: () => void }) {
           <FaSearch className="absolute left-3 top-2 text-gray-500" />
         </div>
 
-        <div className="hidden md:flex items-center space-x-4">
-          {/* Category Select */}
-        </div>
+        <Select
+          options={categoryOptions}
+          placeholder="Category"
+          className=" p-2 rounded-md bg-red-200"
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              height: "40px",
+            }),
+          }}
+        />
+      </div>
 
+      <div className="flex items-center md:space-x-4">
         <div className="flex items-center space-x-4">
           <div onClick={onCartClick} className="mx-2">
             <div className="relative">

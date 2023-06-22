@@ -5,15 +5,16 @@ import Select from "react-select";
 
 interface FilterBarProps {
   filterProducts: IProduct[];
+  viewMode: "list" | "grid";
+  onViewModeChange: (mode: "list" | "grid") => void;
 }
 
-const FilterBar = ({ filterProducts }: FilterBarProps) => {
-  const [viewType, setViewType] = useState("grid");
+const FilterBar = ({
+  filterProducts,
+  viewMode,
+  onViewModeChange,
+}: FilterBarProps) => {
   const [sort, setSort] = useState("latest-products");
-
-  const handleViewTypeChange = (value: string) => {
-    setViewType(value);
-  };
 
   const handleSortChange = (selectedOption: any) => {
     setSort(selectedOption?.value);
@@ -39,14 +40,18 @@ const FilterBar = ({ filterProducts }: FilterBarProps) => {
           <div className="flex items-center space-x-2 mr-5">
             <p className="text-sm font-bold text-gray-600">View:</p>
             <button
-              className="hover:bg-slate-300 hover:shadow-md hover:rounded-full"
-              onClick={() => handleViewTypeChange("list")}
+              className={`mr-2 ${
+                viewMode === "list" ? "text-gray-500" : "text-gray-900"
+              }`}
+              onClick={() => onViewModeChange("list")}
             >
               <FaList className=" " />
             </button>
             <button
-              className="hover:bg-slate-300 hover:shadow-md"
-              onClick={() => handleViewTypeChange("grid")}
+              className={`${
+                viewMode === "grid" ? "text-gray-500" : "text-gray-900"
+              }`}
+              onClick={() => onViewModeChange("grid")}
             >
               <FaThLarge className=" " />
             </button>

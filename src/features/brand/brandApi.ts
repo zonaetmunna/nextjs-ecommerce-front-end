@@ -1,13 +1,13 @@
 import {
   IQueryParams,
   IResponseBrandSingle,
-  IResponseCategories,
+  IResponseBrands,
 } from "@/types/types";
 import apiSlice from "../api/apiSlice";
 
-const categoryApi = apiSlice.injectEndpoints({
+const brandApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getCategories: builder.query<IResponseCategories, IQueryParams>({
+    getBrands: builder.query<IResponseBrands, IQueryParams>({
       query: (params) => {
         console.log(params);
         const { category, search, page, limit, ...restParams } = params || {};
@@ -29,52 +29,52 @@ const categoryApi = apiSlice.injectEndpoints({
         console.log(query);
 
         return {
-          url: "/categories",
+          url: "/brands",
           params: {
             ...query,
             ...restParams,
           },
         };
       },
-      providesTags: ["category"],
+      providesTags: ["brand"],
     }),
-    getSingleCategory: builder.query<IResponseBrandSingle, string>({
+    getSingleBrand: builder.query<IResponseBrandSingle, string>({
       query: (id) => ({
-        url: `/categories/${id}`,
+        url: `/brands/${id}`,
       }),
-      providesTags: ["category"],
+      providesTags: ["brand"],
     }),
-    addCategory: builder.mutation({
+    addBrand: builder.mutation({
       query: (data) => ({
-        url: "/categories",
+        url: "/brands",
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["category"],
+      invalidatesTags: ["brand"],
     }),
-    deleteCategory: builder.mutation({
+    deleteBrand: builder.mutation({
       query: (id) => ({
-        url: `/categories/${id}`,
+        url: `/brands/${id}`,
         method: "DELETE",
         body: id,
       }),
-      invalidatesTags: ["category"],
+      invalidatesTags: ["brand"],
     }),
-    updateCategory: builder.mutation({
-      query: (category) => ({
-        url: `/categories/${category._id}`,
+    updateBrand: builder.mutation({
+      query: (brand) => ({
+        url: `/brands/${brand._id}`,
         method: "PUT",
-        body: category,
+        body: brand,
       }),
-      invalidatesTags: ["category"],
+      invalidatesTags: ["brand"],
     }),
   }),
 });
 
 export const {
-  useGetCategoriesQuery,
-  useGetSingleCategoryQuery,
-  useAddCategoryMutation,
-  useUpdateCategoryMutation,
-  useDeleteCategoryMutation,
-} = categoryApi;
+  useGetBrandsQuery,
+  useGetSingleBrandQuery,
+  useAddBrandMutation,
+  useDeleteBrandMutation,
+  useUpdateBrandMutation,
+} = brandApi;

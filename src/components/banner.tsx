@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,21 +16,24 @@ const Banner = () => {
         pagination={{ clickable: true }}
       >
         <SwiperSlide>
-          <div className=" flex justify-around items-center">
-            <div className=" ">
+          <div className="flex justify-around items-center">
+            <div>
               <h2 className="text-4xl font-semibold">Mens Collection</h2>
               <p className="mt-2 text-xl">Explore our latest products</p>
-              <button className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                Shop Now
-              </button>
+              <Link href="/products">
+                <p className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                  Shop Now
+                </p>
+              </Link>
             </div>
-            <Image
-              className=""
-              src="https://i.ibb.co/XCZT2vQ/young-handsome.jpg"
-              alt="Man"
-              width={400}
-              height={400}
-            />
+            <div className="relative w-64 h-64">
+              <Image
+                src="https://i.ibb.co/XCZT2vQ/young-handsome.jpg"
+                alt="Man"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
