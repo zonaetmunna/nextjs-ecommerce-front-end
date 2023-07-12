@@ -5,7 +5,7 @@ import {
   FaTimesCircle,
   FaTruck,
 } from "react-icons/fa";
-import { Fade } from "react-reveal";
+const Fade = require("react-reveal/Fade");
 
 const deliveryOptions = [
   {

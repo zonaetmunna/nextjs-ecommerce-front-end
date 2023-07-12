@@ -8,7 +8,8 @@ import toast from "react-hot-toast";
 import { FaDollarSign } from "react-icons/fa";
 import { FiEye, FiHeart, FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { Fade, Zoom } from "react-reveal";
+const Fade = require("react-reveal/Fade");
+const Zoom = require("react-reveal/Zoom");
 
 export default function ProductCard({ product }: { product: IProduct }) {
   const { name, image, price, stock, category, _id } = product;

@@ -8,6 +8,7 @@ import { useGetBrandsQuery } from "@/features/brand/brandApi";
 import { useGetCategoriesQuery } from "@/features/category/categoryApi";
 import { useGetProductsQuery } from "@/features/product/productApi";
 import { IBrand, ICategory } from "@/types/types";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import "swiper/css";
@@ -28,6 +29,11 @@ export default function Home() {
   } = useGetBrandsQuery({});
   const brands = brandsData?.data.brand;
 
+  const fadeVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: { opacity: 1, x: 0 },
+  };
+
   return (
     <main className="bg-gray-100">
       <div className="w-full flex items-center bg-white">
@@ -41,12 +47,28 @@ export default function Home() {
             <Link
               href="/products"
               key={brand._id}
-              className="bg-gray-100 mx-5 my-5 px-2 py-2 flex justify-around items-center shadow-md rounded-lg hover:shadow-lg"
+              className="bg-gray-100 mx-5 my-5 px-2 py-2 flex flex-col justify-center items-center shadow-md rounded-lg hover:shadow-lg"
             >
-              <Image src={brand.imageUrl} alt="" width={100} height={100} />
-              <p className="text-md font-normal text-center mb-5">
-                {brand.name}
-              </p>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={fadeVariants}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="w-20 h-20 relative">
+                  <div className="w-full h-full aspect-w-1 aspect-h-1">
+                    <Image
+                      src={brand.imageUrl}
+                      alt={brand.name}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
+                </div>
+                <p className="text-md font-normal text-center mt-2">
+                  {brand.name}
+                </p>
+              </motion.div>
             </Link>
           ))}
         </div>
@@ -54,7 +76,7 @@ export default function Home() {
       {/* category card*/}
       <div className="my-5 py-10 px-10">
         <h3 className="text-2xl font-bold text-center mb-5">Categories</h3>
-        <div className="grid grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-4 gap-4 ">
           {categories?.map((category: ICategory) => (
             <CategroyCard key={category._id} category={category} />
           ))}
